@@ -1,0 +1,19 @@
+#!/bin/bash
+# Base inputs
+KEYFILE="/data/temporary/amirhosein/radboudumc_to_tiff/keyfile.csv"
+BASE_OUT="/data/temporary/amirhosein/radboudumc_to_tiff/"
+LEVEL=1
+DOWNSAMPLE=2
+SPACING=0.25
+
+# Define seven batch ranges (modify these numbers as needed)
+# By running this you will submit 7 low-priority jobs to sol doing your convers>
+batches=("100 199" "200 299" "300 399" "400 499" "500 599" "600 699" "700 799")
+
+# Loop through batches and submit each as a separate job
+for batch in "${batches[@]}"
+do
+    # read batch_start and batch_end
+    read BS BE <<< "$batch"
+    sbatch "$SCRIPT_TO_RUN" "$KEYFILE" "$BASE_OUT" "$LEVEL" "$SPACING" "$DOWNSA>
+done
